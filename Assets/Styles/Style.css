@@ -1,0 +1,55 @@
+*{
+    
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.btn_addTask{
+    margin: 10px 30px ;
+}
+
+
+.table_container{
+    padding: 0px 30px;
+}
+
+/* Task */
+.icon_table a{
+    margin: 2px;
+
+}
+
+form .error_red{
+    border: 3px solid #ff0000;
+}
+
+.tab-content h4{
+    text-align: center;
+}
+.block_icon{
+    display: flex;
+    justify-content: space-around;
+    transition: all .5s linear;
+}
+
+.block_icon i:hover{
+    cursor: pointer;
+    color: royalblue;
+
+}
+
+.edit{
+    background-color: #a5f279;
+}
+
+.edit2{
+    background-color: red;
+}
+
+.color_icon{
+    color: #ff0000;
+    transform: scale(1.2);
+}
