@@ -164,16 +164,13 @@ document.addEventListener('click', function (e) {
         task.filter(item => item.type != '');
     }
 
-    // здесь я не смог сохранить изменения в массив task для отрисовки. вопрос, как заменить старое значение на изменённое.
-
     function editTdTable() {
-        let trNameValue = [...e.target.closest('tr').children].slice(0, 3);
-        let [thItem, tdName, tdDescription] = trNameValue;
+        let [, tdName, tdDescription] = [...e.target.closest('tr').children].slice(0, 3);
+        e.target.classList.toggle('color_icon');
 
         [tdName, tdDescription].forEach(item => {
             item.setAttribute('contentEditable', true);
             item.classList.toggle('edit');
-            e.target.classList.toggle('color_icon');
             tdName.focus();
         });
 
@@ -183,9 +180,10 @@ document.addEventListener('click', function (e) {
         })
 
         if (!tdName.classList.contains('edit')) {
-            console.log(tdName.innerHTML);
             [tdName, tdDescription].forEach(item => item.removeAttribute('contentEditable'));
+            observer.disconnect();
         }
+        localStorage.setItem("Tasks", JSON.stringify(task))
     }
 
 
@@ -222,6 +220,13 @@ document.addEventListener('click', function (e) {
 // это относсится к editTdTable()
 
 let observer = new MutationObserver(mutationRecords => {
-    console.log(mutationRecords[0].oldValue);
+    task.map(item => {
+        if (item.name === mutationRecords[0].oldValue) {
+            item.name = mutationRecords[0].target.textContent
+        };
+        if (item.description === mutationRecords[0].oldValue) {
+            item.description = mutationRecords[0].target.textContent
+        }
+    })
 })
 
